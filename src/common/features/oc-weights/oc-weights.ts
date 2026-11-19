@@ -24,7 +24,7 @@ async function displayScenarioWeights() {
 	findAllElements(":scope > [data-oc-id]:not([data-tt-weights])", list).forEach((row) => {
 		row.dataset.ttWeights = "true";
 
-		const title = findElement("[class*='panelTitle____']", row).textContent;
+		const title = findElement("[class*='panelTitle___']", row).textContent;
 		const data = weightsForScenario(weights, title) ?? {};
 
 		findAllElements("[class*='contentLayer___'] > [class*='wrapper___'] > [class*='wrapper___']", row).forEach((slotElement) => {
@@ -57,7 +57,7 @@ async function fetchWeights(): Promise<TornProbabilityRoleWeights> {
 		return ttCache.get("probability-weights")!;
 	}
 
-	const weights = await fetchData<TornProbabilityRoleWeights>("tornprobability", { section: "GetRoleWeights", relay: true });
+	const weights = await fetchData<TornProbabilityRoleWeights>("tornprobability", { section: "GetRoleWeights" });
 
 	ttCache.set({ "probability-weights": weights }, TO_MILLIS.DAYS);
 	return weights;

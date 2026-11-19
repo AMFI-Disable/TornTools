@@ -12,12 +12,116 @@
 				{
 					"message": "Link poker opponent names to their Torn profiles.",
 					"contributor": "AwesomeOddEven"
+				},
+				{
+					"message": "Show estimated gym gains.",
+					"contributor": "AwesomeOddEven"
+				},
+				{
+					"message": "Show the member counts per status on each side of a ranked war.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Calculate the value of an entire item category.",
+					"contributor": "DeKleineKobini"
 				}
 			],
-			"fixes": [],
-			"changes": [],
-			"removed": [],
-			"technical": []
+			"fixes": [
+				{
+					"message": "'Hide Icons' now hides the fading on mobile if scrolling no longer is an option.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Correctly show the World Diabetes Day event tripling the provided happy instead of doubling in 'Candy Happy'.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Make sure the 'Race Car Selector' doesn't appear twice.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Move the top icons (like in 'Computer Link') back to the right.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "'Show Faction Spy' was no longer showing up due to the call to TornStats failing.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Add the missing option to disable Raid Report to CSV.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "'OC Weights' no longer was showing up.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Avoid an error with 'Cost to Next Stock'.",
+					"contributor": "DeKleineKobini"
+				}
+			],
+			"changes": [
+				{
+					"message": "'Hide Crime Flavour Text' now also hides neutral stories.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Show which targets each target tier includes in 'Pickpocketing Tier'.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Improve accessibility on our internal pages.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Be less strict in when we disable features based on API errors.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Slightly move the 'Travel Table' icon when flying.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Ignore errors caused by Torn itself in the feature manager.",
+					"contributor": "DeKleineKobini"
+				}
+			],
+			"removed": [
+				{
+					"message": "Remove the feature to hide the recycle message on the item page, as it no longer seems to appear.",
+					"contributor": "DeKleineKobini"
+				}
+			],
+			"technical": [
+				{
+					"message": "Refactor 'Lottery Chance' to be easier to maintain.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Combine functions to get the current bar values on-page.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "No longer decide what calls to relay through the background.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Change the way 'Forum Menu' updates your preferences.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Refactor the container component to use modular CSS.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Refactor the container builder to use the container's modular CSS.",
+					"contributor": "DeKleineKobini"
+				},
+				{
+					"message": "Refactor the data table element to use modular CSS.",
+					"contributor": "DeKleineKobini"
+				}
+			]
 		}
 	},
 	{

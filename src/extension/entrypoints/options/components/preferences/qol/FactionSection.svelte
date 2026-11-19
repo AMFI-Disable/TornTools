@@ -91,6 +91,7 @@
 			<StorageSwitch path="settings.pages.faction.warReportHighlight" label="Highlight yourself in war reports" />
 			<StorageSwitch path="settings.pages.faction.rankedWarValue" label="Show the total rewards for ranked wars" />
 			<StorageSwitch path="settings.pages.faction.stakeout" label="Show the option to stakeout a faction" />
+			<StorageSwitch path="settings.pages.faction.warOnlineStatus" label="Count the members per status in a ranked war" />
 		</PreferenceSettingGroup>
 
 		<PreferenceSettingGroup title="Banking">
@@ -101,6 +102,7 @@
 		<PreferenceSettingGroup title="CSV">
 			<StorageSwitch path="settings.pages.faction.csvRankedWarReport" label="Ranked war report" />
 			<StorageSwitch path="settings.pages.faction.csvWarReport" label="War report" />
+			<StorageSwitch path="settings.pages.faction.csvRaidReport" label="Raid report" />
 			<StorageSwitch path="settings.pages.faction.csvChainReport" label="Chain report" />
 			<StorageSwitch path="settings.pages.faction.csvChallengeContributions" label="Challenge contributions" />
 		</PreferenceSettingGroup>
@@ -137,7 +139,7 @@
 
 	<PreferenceSectionCard title="Faction Member Inactivity Warning" description="Requires last action to be enabled.">
 		{#snippet action()}
-			<Button type="button" size="icon-xs" variant="outline" onclick={addFactionInactivityWarning}>
+			<Button type="button" size="icon-xs" variant="outline" aria-label="Add faction inactivity warning" onclick={addFactionInactivityWarning}>
 				<PlusIcon />
 			</Button>
 		{/snippet}
@@ -161,7 +163,13 @@
 							value={warning.color}
 							oninput={(event) => updateFactionInactivityWarningField(index, "color", event.currentTarget.value)}
 						/>
-						<Button type="button" size="icon" variant="destructive" onclick={() => removeFactionInactivityWarning(index)}>
+						<Button
+							type="button"
+							size="icon"
+							variant="destructive"
+							aria-label={`Remove ${warning.days === null ? "faction inactivity warning" : `${warning.days} day faction inactivity warning`}`}
+							onclick={() => removeFactionInactivityWarning(index)}
+						>
 							<TrashIcon />
 						</Button>
 					</div>

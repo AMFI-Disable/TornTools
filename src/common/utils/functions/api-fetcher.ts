@@ -57,18 +57,18 @@ export interface FetchOptions {
 	body: any;
 	silent: boolean;
 	includeKey: boolean;
-	relay: boolean;
 	params: { [key: string]: any };
 }
 
+const CSP_ALLOWED_PLATFORMS: FetchLocation[] = ["torn_direct", "tornv2"];
 const TORN_API_PLATFORMS: FetchLocation[] = ["tornv2"];
 const TEXT_RESPONSE_PLATFORMS: FetchLocation[] = ["torn_direct", "laekna"];
 
 export async function fetchData<R = any>(location: FetchLocation, partialOptions: Partial<FetchOptions> = {}): Promise<R> {
 	const options = mergeOptions(partialOptions);
 
-	if (options.relay && SCRIPT_TYPE !== "BACKGROUND" && !RUNTIME_INFORMATION.isUserscript()) {
-		return relayToBackground(location, options);
+	if (SCRIPT_TYPE !== "BACKGROUND" && !RUNTIME_INFORMATION.isUserscript() && !CSP_ALLOWED_PLATFORMS.includes(location)) {
+		return OFFLOAD_SERVICE.fetchRelay(location, options);
 	}
 
 	const request = buildFetchRequest(location, options);
@@ -109,14 +109,9 @@ export function mergeOptions(partial: Partial<FetchOptions>): FetchOptions {
 		body: undefined,
 		silent: false,
 		includeKey: false,
-		relay: false,
 		params: {},
 		...partial,
 	};
-}
-
-async function relayToBackground<R = any>(location: FetchLocation, options: FetchOptions): Promise<R> {
-	return OFFLOAD_SERVICE.fetchRelay(location, { ...options, relay: false });
 }
 
 function decideTimeoutTimer(location: FetchLocation): number {
@@ -278,11 +273,11 @@ async function handleTimeoutError(location: FetchLocation, options: FetchOptions
 	throw { error, isLocal: false, code: CUSTOM_API_ERROR.CANCELLED };
 }
 
-async function handleTornApiState(location: FetchLocation, options: FetchOptions, error?: string, online = false) {
+async function handleTornApiState(location: FetchLocation, options: FetchOptions, error?: string, online = false, errorCode: number | null = null) {
 	if (!TORN_API_PLATFORMS.includes(location) || options.silent || SCRIPT_TYPE !== "BACKGROUND") return;
 
 	if (error) {
-		await ttStorage.change({ api: { torn: { online, error } } });
+		await ttStorage.change({ api: { torn: { online, error, errorCode } } });
 		await setBadge("error");
 	} else {
 		await getBadgeText()
@@ -291,7 +286,7 @@ async function handleTornApiState(location: FetchLocation, options: FetchOptions
 			})
 			.catch(() => logger.error("Couldn't get the badge text."));
 
-		await ttStorage.change({ api: { torn: { online: true, error: "" } } });
+		await ttStorage.change({ api: { torn: { online: true, error: "", errorCode: null } } });
 	}
 }
 
@@ -322,19 +317,17 @@ async function hasOrigins(...locations: FetchLocation[]): Promise<boolean> {
 
 async function handleApiError(location: FetchLocation, options: FetchOptions, result: any): Promise<never> {
 	if (TORN_API_PLATFORMS.includes(location)) {
-		let error: string, online: boolean;
-
 		if (result.error instanceof HTTPException) {
-			error = result.error.toString();
-			online = false;
-		} else {
-			error = result.error.error;
-			online = result.error.code !== 9 && !(result instanceof HTTPException);
+			const error = result.error.asObject();
+
+			await handleTornApiState(location, options, result.error.toString(), false, error.code);
+
+			throw error;
 		}
 
-		await handleTornApiState(location, options, error, online);
+		await handleTornApiState(location, options, result.error.error, result.error.code !== 9, result.error.code);
 
-		throw result.error instanceof HTTPException ? result.error.asObject() : result.error;
+		throw result.error;
 	}
 
 	throw { error: result.error };

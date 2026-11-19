@@ -277,8 +277,8 @@ export const PREFERENCE_SEARCH_DATA: readonly SearchablePreference[] = [
 	{ path: "settings.pages.items.highlightBloodBags", label: "Highlight blood bags", group: "financial", section: "items" },
 	{ path: "settings.pages.items.energyWarning", label: "Warn if an item gives you energy over 1000", group: "financial", section: "items" },
 	{ path: "settings.pages.items.medicalLife", label: "Show life information when consuming medical items", group: "financial", section: "items" },
-	{ path: "settings.pages.items.hideRecycleMessage", label: "Hide the recycle message", group: "financial", section: "items" },
 	{ path: "settings.pages.items.hideTooManyItemsWarning", label: "Hide the too many items warning", group: "financial", section: "items" },
+	{ path: "settings.pages.items.categoryValueCalculator", label: "Calculate the value of an entire item category", group: "financial", section: "items" },
 	{ path: "settings.pages.items.missingBooks", label: "Display missing books", group: "financial", section: "items" },
 	{ path: "settings.pages.items.missingFlowers", label: "Missing flowers", group: "financial", section: "items", keywords: ["museum"] },
 	{ path: "settings.pages.items.missingPlushies", label: "Missing plushies", group: "financial", section: "items", keywords: ["museum"] },
@@ -487,6 +487,7 @@ export const PREFERENCE_SEARCH_DATA: readonly SearchablePreference[] = [
 	{ path: "settings.pages.faction.csvWarReport", label: "CSV: War report", group: "qol", section: "faction" },
 	{ path: "settings.pages.faction.csvChainReport", label: "CSV: Chain report", group: "qol", section: "faction" },
 	{ path: "settings.pages.faction.csvChallengeContributions", label: "CSV: Challenge contributions", group: "qol", section: "faction" },
+	{ path: "settings.pages.faction.csvRaidReport", label: "CSV: Raid report", group: "qol", section: "faction" },
 	{ path: "settings.pages.faction.highlightOwn", label: "Highlight own OC", group: "qol", section: "faction", keywords: ["organized crime"] },
 	{ path: "settings.pages.faction.openOc", label: "Open ready OCs", group: "qol", section: "faction", keywords: ["organized crime"] },
 	{
@@ -518,6 +519,7 @@ export const PREFERENCE_SEARCH_DATA: readonly SearchablePreference[] = [
 	{ path: "settings.pages.faction.warReportHighlight", label: "Highlight yourself in war reports", group: "qol", section: "faction" },
 	{ path: "settings.pages.faction.ocWeights", label: "Display role weights for OC2 scenarios", group: "qol", section: "faction" },
 	{ path: "settings.pages.faction.submitScenarios", label: "Submit OC2 scenario data", group: "qol", section: "faction" },
+	{ path: "settings.pages.faction.warOnlineStatus", label: "Count the members per status in a ranked war", group: "qol", section: "faction" },
 
 	// Section: profile
 	{ path: "settings.pages.profile.avgpersonalstats", label: "Calculate average personal stats", group: "qol", section: "profile" },
@@ -547,6 +549,7 @@ export const PREFERENCE_SEARCH_DATA: readonly SearchablePreference[] = [
 	// Section: gym
 	{ path: "settings.pages.gym.specialist", label: "Show specialist gym requirements", group: "qol", section: "gym" },
 	{ path: "settings.pages.gym.disableStats", label: "Allow stats to be disabled in gym", group: "qol", section: "gym" },
+	{ path: "settings.pages.gym.gainEstimate", label: "Show estimated gym gains", group: "qol", section: "gym" },
 	{ path: "settings.pages.gym.steadfast", label: "Show current steadfast bonus for each stat", group: "qol", section: "gym" },
 	{ path: "settings.pages.gym.progress", label: "Display estimated gym energy progress", group: "qol", section: "gym" },
 	{ path: "settings.pages.gym.titles", label: "Show gym details for locked gyms", group: "qol", section: "gym" },

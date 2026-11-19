@@ -7,7 +7,7 @@ import { logger } from "@common/utils/functions/logger";
 import { requireCondition, requireElement } from "@common/utils/functions/requires";
 import { getCookie, isIntNumber, TO_MILLIS } from "@common/utils/functions/utilities";
 import { torntools } from "@common/utils/icons/torntools";
-import type { TornCalendarActivity, TornCalendarResponse, UserStock } from "tornapi-typescript";
+import type { TornCalendarActivity, TornCalendarResponse, TornInventoryItemType, UserLastActionStatusEnum, UserStock } from "tornapi-typescript";
 import { elementBuilder, findParent, getSearchParameters, isElement } from "./dom";
 import { findAllElements, findElement, findElementWithText } from "./find-elements";
 import { convertToNumber, formatNumber } from "./formatting";
@@ -1482,34 +1482,33 @@ export const SPECIAL_FILTER_ICONS: Record<string, string[]> = {
 
 export const CHAIN_BONUSES = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, 100000] as const;
 
-export const ITEM_TYPES = [
-	"Melee",
-	"Secondary",
-	"Primary",
-	"Defensive",
-	"Candy",
-	"Other",
-	"Special",
-	"Material",
-	"Clothing",
-	"Jewelry",
-	"Tool",
-	"Medical",
-	"Collectible",
-	"Car",
-	"Flower",
-	"Booster",
-	"Unused",
+export const ITEM_TYPES: TornInventoryItemType[] = [
 	"Alcohol",
-	"Plushie",
-	"Drug",
-	"Temporary",
-	"Supply Pack",
-	"Enhancer",
 	"Artifact",
-	"Energy Drink",
 	"Book",
-] as const;
+	"Booster",
+	"Candy",
+	"Car",
+	"Clothing",
+	"Collectible",
+	"Defensive",
+	"Drug",
+	"Energy Drink",
+	"Enhancer",
+	"Flower",
+	"Jewelry",
+	"Material",
+	"Medical",
+	"Melee",
+	"Other",
+	"Plushie",
+	"Primary",
+	"Secondary",
+	"Special",
+	"Supply Pack",
+	"Temporary",
+	"Tool",
+];
 
 export const WEAPON_BONUSES = [
 	"Achilles",
@@ -2061,12 +2060,6 @@ export function isOwnProfile() {
 	return (params.has("XID") && parseInt(params.get("XID")!) === id) || (params.has("NID") && params.get("NID") === name);
 }
 
-export function getUserEnergy() {
-	return findElement("[class*='bar__'][class*='energy__'] [class*='bar-value___'], [class*='bar__'][class*='energy__'] [class*='barValue___']")
-		.textContent.split("/")
-		.map((x) => parseInt(x));
-}
-
 export function getItemEnergy(id: number) {
 	const effect = ITEM_RESOLVER.getStaticItem(id)?.effect;
 	if (!effect) return false;
@@ -2079,8 +2072,8 @@ export function getItemEnergy(id: number) {
 	return !Number.isNaN(parseInt(value)) ? parseInt(value) : false;
 }
 
-export function getUserLife() {
-	return findElement("[class*='bar__'][class*='life__'] :is([class*='bar-value___'], [class*='barValue___'])")
+export function getUserBar(stat: "energy" | "nerve" | "happy" | "life") {
+	return findElement(`[class*='bar__'][class*='${stat}__'] :is([class*='bar-value___'], [class*='barValue___'])`)
 		.textContent.split("/")
 		.map((x) => parseInt(x));
 }
@@ -2128,10 +2121,6 @@ export function hasFinishedEducation() {
 	return torndata.education.flatMap((e) => e.courses).every(({ id }) => userdata.education.complete.includes(id));
 }
 
-export function isChatV3() {
-	return !!findElement("#notes_settings_button", true);
-}
-
 let ttTopLinks: HTMLElement | undefined, ttTopLinksCreating: boolean | undefined;
 
 export async function createTTTopLinks() {
@@ -2145,8 +2134,8 @@ export async function createTTTopLinks() {
 	ttTopLinksCreating = true;
 	const topLinks = elementBuilder({ type: "div", class: "tt-top-icons" });
 	ttTopLinks = topLinks;
-	await requireElement("[class*='titleContainer___']").then((title) => {
-		title.appendChild(topLinks);
+	await requireElement("[class*='freeSpace___']").then((title) => {
+		title.insertAdjacentElement("afterend", topLinks);
 		ttTopLinksCreating = false;
 	});
 	return topLinks;
@@ -2728,3 +2717,24 @@ export type TravelCountry =
 	| "switzerland"
 	| "uae"
 	| "united_kingdom";
+
+export type UserActivityStatus = Lowercase<UserLastActionStatusEnum>;
+
+export function getUserActivity(element: ParentNode): UserActivityStatus | "" {
+	const icon = findElement("[class*='userOnlineStatusIcon___']", element, true);
+	if (icon) {
+		const label = icon?.getAttribute("alt") || icon.closest("[aria-label]")?.getAttribute("aria-label");
+		const labelMatch = label?.match(/\b(online|idle|offline)\b/i);
+		if (labelMatch) {
+			return labelMatch[1].toLowerCase() as UserActivityStatus;
+		}
+	}
+
+	const title = findElement("#iconTray li", element, true)?.getAttribute("title");
+	const titleMatch = title?.match(/Online|Idle|Offline/g);
+	if (titleMatch) {
+		return titleMatch[0].toLowerCase().trim() as UserActivityStatus;
+	}
+
+	return "";
+}

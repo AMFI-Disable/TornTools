@@ -43,6 +43,7 @@ export const DEFAULT_STORAGE = {
 			key: new DefaultSetting<string | null>("string"),
 			online: new DefaultSetting("boolean", true),
 			error: new DefaultSetting<string | null>("string"),
+			errorCode: new DefaultSetting<number | null>("number"),
 			owner: new DefaultSetting<number | null>("number"),
 		},
 		tornstats: {
@@ -303,8 +304,8 @@ export const DEFAULT_STORAGE = {
 				energyWarning: new DefaultSetting("boolean", true),
 				medicalLife: new DefaultSetting("boolean", true),
 				openedSupplyPackValue: new DefaultSetting("boolean", true),
-				hideRecycleMessage: new DefaultSetting("boolean", false),
 				hideTooManyItemsWarning: new DefaultSetting("boolean", false),
+				categoryValueCalculator: new DefaultSetting("boolean", false),
 			},
 			crimes: {
 				quickCrimes: new DefaultSetting("boolean", true),
@@ -444,6 +445,7 @@ export const DEFAULT_STORAGE = {
 				warReportHighlight: new DefaultSetting("boolean", true),
 				ocWeights: new DefaultSetting("boolean", true),
 				submitScenarios: new DefaultSetting("boolean", false),
+				warOnlineStatus: new DefaultSetting("boolean", true),
 			},
 			property: {
 				filter: new DefaultSetting("boolean", true),
@@ -456,6 +458,7 @@ export const DEFAULT_STORAGE = {
 				disableStats: new DefaultSetting("boolean", true),
 				graph: new DefaultSetting("boolean", true),
 				steadfast: new DefaultSetting("boolean", true),
+				gainEstimate: new DefaultSetting("boolean", true),
 				progress: new DefaultSetting("boolean", true),
 				titles: new DefaultSetting("boolean", true),
 			},
@@ -732,6 +735,9 @@ export const DEFAULT_STORAGE = {
 		},
 		city: {
 			highlightItems: new DefaultSetting("boolean", true),
+		},
+		items: {
+			categoryValueCalculator: new DefaultSetting<{ category: string; mode: string }>("object", { category: "", mode: "combo" }),
 		},
 		bounties: {
 			minLevel: new DefaultSetting("number", 1),
@@ -1031,11 +1037,11 @@ export function getDefaultStorage(defaultStorage: { [key: string]: any }) {
 					case "boolean":
 					case "number":
 					case "string":
-					case "object":
 						newStorage[key] = setting.defaultValue;
 						break;
+					case "object":
 					default:
-						newStorage[key] = setting.defaultValue;
+						newStorage[key] = structuredClone(setting.defaultValue);
 						break;
 				}
 			} else {

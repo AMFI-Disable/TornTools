@@ -54,6 +54,7 @@ import CanEnergyFeature from "@features/can-energy/can-energy";
 import CandyHappyFeature from "@features/candy-happy/candy-happy";
 import CarWinPercentageFeature from "@features/car-win-percentage/car-win-percentage";
 import CasinoNetTotalFeature from "@features/casino-net-total/casino-net-total";
+import CategoryValueCalculatorFeature from "@features/category-value-calculator/category-value-calculator";
 import ChatAutocompleteFeature from "@features/chat-autocomplete/chat-autocomplete";
 import ChatFontSizeFeature from "@features/chat-font-size/chat-font-size";
 import ChatHighlightFeature from "@features/chat-highlight/chat-highlight";
@@ -97,6 +98,7 @@ import FactionMemberFilterFeature from "@features/faction-member-filter/faction-
 import FactionOCTimeFeature from "@features/faction-oc-time/faction-oc-time";
 import FactionQuickItemsFeature from "@features/faction-quick-items/faction-quick-items";
 import FactionStakeoutsFeature from "@features/faction-stakeouts/faction-stakeouts";
+import FactionWarOnlineCountsFeature from "@features/faction-war-online-counts/faction-war-online-counts";
 import FairAttackFeature from "@features/fair-attack/fair-attack";
 import FastHuntingFeature from "@features/fast-hunting/fast-hunting.ts";
 import FFScouterAttackFeature from "@features/ff-scouter/ff-scouter-attack";
@@ -118,6 +120,7 @@ import FriendlyFireFeature from "@features/friendly-fire/friendly-fire";
 import FullFactionInfoboxFeature from "@features/full-faction-infobox/full-faction-infobox";
 import GreyCompletedCoursesFeature from "@features/grey-completed-courses/grey-completed-courses";
 import GymDisableStatsFeature from "@features/gym-disable-stats/gym-disable-stats";
+import GymGainEstimateFeature from "@features/gym-gain-estimate/gym-gain-estimate";
 import GymGraphFeature from "@features/gym-graph/gym-graph";
 import GymProgressFeature from "@features/gym-progress/gym-progress";
 import GymSteadfastFeature from "@features/gym-steadfast/gym-steadfast";
@@ -131,7 +134,6 @@ import HideIconsFeature from "@features/hide-icons/hide-icons";
 import HideLeaveButtonsFeature from "@features/hide-leave-buttons/hide-leave-buttons";
 import HideLevelUpgradeFeature from "@features/hide-level-upgrade/hide-level-upgrade";
 import HideNewspaperHighlightFeature from "@features/hide-newspaper-highlight/hide-newspaper-highlight";
-import HideRecycleMessageFeature from "@features/hide-recycle-message/hide-recycle-message";
 import HideStocksFeature from "@features/hide-stocks/hide-stocks";
 import HideTooManyItemsWarningFeature from "@features/hide-too-many-items-warning/hide-too-many-items-warning";
 import HideTravelInventoryFeature from "@features/hide-travel-inventory/hide-travel-inventory";
@@ -362,7 +364,6 @@ export function scriptManager() {
 		FEATURE_MANAGER.registerFeature(new MuseumMarketLinkFeature());
 	} else if (page === "item") {
 		setupItemPage();
-		FEATURE_MANAGER.registerFeature(new HideRecycleMessageFeature());
 		FEATURE_MANAGER.registerFeature(new HideTooManyItemsWarningFeature());
 		FEATURE_MANAGER.registerFeature(new HighlightBloodBagsFeature());
 		FEATURE_MANAGER.registerFeature(new QuickItemsFeature());
@@ -378,6 +379,7 @@ export function scriptManager() {
 		FEATURE_MANAGER.registerFeature(new MissingFlowersFeature());
 		FEATURE_MANAGER.registerFeature(new MarketIconsFeature());
 		FEATURE_MANAGER.registerFeature(new MissingBooksFeature());
+		FEATURE_MANAGER.registerFeature(new CategoryValueCalculatorFeature());
 	} else if (page === "auction") {
 		setupAuctionHousePage().catch(logger.debug);
 		FEATURE_MANAGER.registerFeature(new AuctionHouseFilterFeature());
@@ -440,6 +442,7 @@ export function scriptManager() {
 		FEATURE_MANAGER.registerFeature(new FullFactionInfoboxFeature());
 		FEATURE_MANAGER.registerFeature(new FFScouterFactionFeature());
 		FEATURE_MANAGER.registerFeature(new LastActionFactionFeature());
+		FEATURE_MANAGER.registerFeature(new FactionWarOnlineCountsFeature());
 		FEATURE_MANAGER.registerFeature(new OCAvailablePlayersFeature());
 		FEATURE_MANAGER.registerFeature(new OCLastActionFeature());
 		FEATURE_MANAGER.registerFeature(new OpenOCFeature());
@@ -471,6 +474,7 @@ export function scriptManager() {
 		FEATURE_MANAGER.registerFeature(new GymGraphFeature());
 		FEATURE_MANAGER.registerFeature(new GymProgressFeature());
 		FEATURE_MANAGER.registerFeature(new GymSteadfastFeature());
+		FEATURE_MANAGER.registerFeature(new GymGainEstimateFeature());
 		FEATURE_MANAGER.registerFeature(new GymTitlesFeature());
 		FEATURE_MANAGER.registerFeature(new SpecialistGymsFeature());
 	} else if (page === "hospital") {

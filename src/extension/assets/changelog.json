@@ -8,7 +8,12 @@
 		"title": "Beta",
 		"date": false,
 		"logs": {
-			"features": [],
+			"features": [
+				{
+					"message": "Link poker opponent names to their Torn profiles.",
+					"contributor": "AwesomeOddEven"
+				}
+			],
 			"fixes": [],
 			"changes": [],
 			"removed": [],

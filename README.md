@@ -17,6 +17,16 @@ _A browser extension for Torn.com_
 [![Github License](https://img.shields.io/github/license/Mephiles/torntools_extension?style=for-the-badge)](https://github.com/Mephiles/torntools_extension/blob/master/LICENSE.md)
 [![GitHub Build](https://img.shields.io/github/actions/workflow/status/Mephiles/torntools_extension/testing.yml?branch=master&style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAYUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAEdwTHO38yIAAAAIdFJOU/k2D9Nrt5MA1Sk7ugAAAHZJREFUCNcljrEKg0AQRAc8U59KuD6itl7EPkljLQq24h+cKPP7mdNp9rHD7Cwo7Q2JCE8vCDkDNkFlWCXROuBsyt2Bhbf41W8wdCvSdlHKQpLFj+aoOwfwyBqBFt33isMUiSPKGcMJL+gNQ2vUNQ1qjanX/ccfxlQhprAciDYAAAAASUVORK5CYII=)](https://github.com/Mephiles/torntools_extension/actions/workflows/testing.yml)
 
+## Star History
+
+<a href="https://www.star-history.com/?type=date&repos=amfi-disable%2Ftorntools">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=amfi-disable%2Ftorntools&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=amfi-disable%2Ftorntools&type=date&legend=top-left" />
+    <img alt="AMFI-Disable/TornTools Star History Chart" src="https://api.star-history.com/chart?repos=amfi-disable%2Ftorntools&type=date&legend=top-left" />
+  </picture>
+</a>
+
 **Links**
 
 <a href="https://www.torn.com/forums.php#/p=threads&f=67&t=16243863">

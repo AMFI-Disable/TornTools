@@ -52,6 +52,7 @@ jobs:
                   if-no-files-found: error
 
     upload:
+        if: github.repository == 'Mephiles/torntools_extension'
         needs: build
         runs-on: ubuntu-latest
 
